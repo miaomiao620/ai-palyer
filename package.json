@@ -93,8 +93,7 @@
   "workspaces": [
     "dev-packages/*",
     "electron-app",
-    "packages/*",
-    "sample-plugins/*/*"
+    "packages/*"
   ],
   "theiaPluginsDir": "plugins",
   "theiaPlugins": {
