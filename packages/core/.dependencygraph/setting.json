@@ -1,0 +1,13 @@
+{
+  "entryFilePath": "./src/electron-main/electron-main-application.ts",
+  "alias": false,
+  "resolveExtensions": [
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".vue",
+    ".scss",
+    ".less"
+  ]
+}

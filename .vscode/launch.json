@@ -1,0 +1,68 @@
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch with Node.js",
+      "program": "${file}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Electron Backend",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      },
+      "cwd": "${workspaceFolder}/electron-app",
+      "protocol": "inspector",
+      "args": [
+        ".",
+        "--log-level=debug",
+        "--hostname=localhost",
+        "--no-cluster",
+        "--app-project-path=${workspaceFolder}/electron-app",
+        "--remote-debugging-port=9222",
+        "--no-app-auto-install",
+        "--plugins=local-dir:../../plugins",
+        "--ovsx-router-config=${workspaceFolder}/ovsx-router-config.json"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "sourceMaps": true,
+      "outFiles": [
+        "${workspaceFolder}/electron-app/lib/backend/electron-main.js",
+        "${workspaceFolder}/electron-app/lib/backend/main.js",
+        "${workspaceFolder}/electron-app/lib/**/*.js",
+        "${workspaceFolder}/api-samples/lib/**/*.js",
+        "${workspaceFolder}/packages/*/lib/**/*.js",
+        "${workspaceFolder}/dev-packages/*/lib/**/*.js"
+      ],
+      "smartStep": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std"
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Launch Electron Backend & Frontend",
+      "configurations": [
+        "Launch Electron Backend",
+        "Attach to Plugin Host",
+        "Attach to Electron Frontend"
+      ],
+      "stopAll": true
+    }
+  ]
+}
