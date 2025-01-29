@@ -23,40 +23,25 @@
   font-size: var(--theia-ui-font-size0);
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row
-  .open-editors-prefix-icon-container {
+.theia-open-editors-widget .open-editors-node-row .open-editors-prefix-icon-container {
   min-width: var(--theia-open-editors-icon-width);
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row
-  .open-editors-prefix-icon.dirty,
-.theia-open-editors-widget
-  .open-editors-node-row.dirty:hover
-  .open-editors-prefix-icon.dirty {
+.theia-open-editors-widget .open-editors-node-row .open-editors-prefix-icon.dirty,
+.theia-open-editors-widget .open-editors-node-row.dirty:hover .open-editors-prefix-icon.dirty {
   display: none;
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row.dirty
-  .open-editors-prefix-icon.dirty {
+.theia-open-editors-widget .open-editors-node-row.dirty .open-editors-prefix-icon.dirty {
   display: block;
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row
-  .open-editors-prefix-icon.close {
+.theia-open-editors-widget .open-editors-node-row .open-editors-prefix-icon.close {
   display: none;
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row:not(.dirty)
-  .theia-mod-selected
-  .open-editors-prefix-icon.close,
-.theia-open-editors-widget
-  .open-editors-node-row:hover
-  .open-editors-prefix-icon.close {
+.theia-open-editors-widget .open-editors-node-row:not(.dirty) .theia-mod-selected .open-editors-prefix-icon.close,
+.theia-open-editors-widget .open-editors-node-row:hover .open-editors-prefix-icon.close {
   display: block;
 }
 
@@ -91,14 +76,10 @@
   align-items: center;
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row
-  .open-editors-inline-actions-container {
+.theia-open-editors-widget .open-editors-node-row .open-editors-inline-actions-container {
   visibility: hidden;
 }
 
-.theia-open-editors-widget
-  .open-editors-node-row:hover
-  .open-editors-inline-actions-container {
+.theia-open-editors-widget .open-editors-node-row:hover .open-editors-inline-actions-container {
   visibility: visible;
 }
