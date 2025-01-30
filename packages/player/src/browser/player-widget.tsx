@@ -6,7 +6,6 @@ import { MessageService } from '@theia/core';
 import { Message } from '@theia/core/lib/browser';
 import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell';
 import { Widget } from '@theia/core/lib/browser';
-import Artplayer from 'artplayer';
 
 @injectable()
 export class AiPlayerWidget extends ReactWidget {
@@ -20,10 +19,9 @@ export class AiPlayerWidget extends ReactWidget {
     protected readonly shell: ApplicationShell;
 
     private mainPageWidget: Widget | undefined;
-    private art: Artplayer | undefined;
 
-    protected videoPath: string = '';
-    protected subtitlePath: string = '';
+    protected videoPath: string = 'D:\\movie\\Broke_Girls\\Pcjm S01e01.mp4';
+    protected subtitlePath: string = 'D:\\movie\\Broke_Girls\\PCJM S01E01.srt';
 
     protected updateVideoPath = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.videoPath = e.target.value;
@@ -36,8 +34,25 @@ export class AiPlayerWidget extends ReactWidget {
     };
 
     protected openFilm = async () => {
-        if (this.art) {
-            this.art.url = `file://${this.videoPath}`;
+        const videoElement = document.querySelector('#player-video') as HTMLVideoElement;
+        if (videoElement) {
+            videoElement.src = `file://${this.videoPath}`;
+            videoElement.muted = false;
+            videoElement.volume = 1.0;
+            // 如果有字幕路径，添加字幕轨道
+            if (this.subtitlePath) {
+                // 移除现有字幕轨道
+                while (videoElement.firstChild) {
+                    videoElement.removeChild(videoElement.firstChild);
+                }
+                const track = document.createElement('track');
+                track.kind = 'subtitles';
+                track.src = `file://${this.subtitlePath}`;
+                track.srclang = 'en';
+                track.label = 'English';
+                track.default = true;
+                videoElement.appendChild(track);
+            }
         }
     };
 
@@ -66,14 +81,18 @@ export class AiPlayerWidget extends ReactWidget {
             element.style.flexDirection = 'column';
             element.style.backgroundColor = '#000';
 
-            // 创建播放器容器
-            const artContainer = document.createElement('div');
-            artContainer.id = 'artplayer-container';
-            artContainer.style.width = '100%';
-            artContainer.style.height = '100%';
-            artContainer.style.position = 'relative';
+            // 创建视频播放器
+            const videoElement = document.createElement('video');
+            videoElement.id = 'player-video';
+            videoElement.style.width = '100%';
+            videoElement.style.height = '100%';
+            videoElement.controls = true;
+            videoElement.style.outline = 'none';
+            videoElement.muted = false;
+            videoElement.volume = 1.0;
+            videoElement.crossOrigin = 'anonymous';
 
-            element.appendChild(artContainer);
+            element.appendChild(videoElement);
             this.mainPageWidget.node.appendChild(element);
 
             // 添加到 shell
@@ -82,46 +101,10 @@ export class AiPlayerWidget extends ReactWidget {
                 mode: 'split-right'
             });
 
-            // 使用 requestAnimationFrame 确保 DOM 已经渲染
-            requestAnimationFrame(() => {
-                try {
-                    console.log('Initializing Artplayer');
-
-                    this.art = new Artplayer({
-                        container: artContainer,
-                        url: '',
-                        volume: 0.5,
-                        autoplay: false,
-                        pip: true,
-                        screenshot: true,
-                        setting: true,
-                        flip: true,
-                        playbackRate: true,
-                        aspectRatio: true,
-                        fullscreen: true,
-                        fullscreenWeb: true,
-                        subtitleOffset: true,
-                        miniProgressBar: true,
-                        mutex: true,
-                        backdrop: true,
-                        playsInline: true,
-                        autoSize: true,
-                        autoMini: true,
-                        autoOrientation: true,
-                    });
-
-                    console.log('Artplayer initialized successfully');
-
-                    // 确保显示和激活
-                    if (this.mainPageWidget) {
-                        this.mainPageWidget.show();
-                        this.shell.activateWidget(this.mainPageWidget.id);
-                        this.shell.revealWidget(this.mainPageWidget.id);
-                    }
-                } catch (error) {
-                    console.error('Failed to initialize Artplayer:', error);
-                }
-            });
+            // 显示和激活
+            this.mainPageWidget.show();
+            this.shell.activateWidget(this.mainPageWidget.id);
+            this.shell.revealWidget(this.mainPageWidget.id);
         } else {
             this.mainPageWidget.show();
             this.shell.activateWidget(this.mainPageWidget.id);
@@ -198,8 +181,10 @@ export class AiPlayerWidget extends ReactWidget {
     }
 
     protected override onBeforeDetach(msg: Message): void {
-        if (this.art) {
-            this.art.destroy();
+        const videoElement = document.querySelector('#player-video') as HTMLVideoElement;
+        if (videoElement) {
+            videoElement.pause();
+            videoElement.src = '';
         }
         super.onBeforeDetach(msg);
     }

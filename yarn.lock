@@ -3214,7 +3214,7 @@ arrify@^2.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-2.0.1.tgz#c9655e9331e0abcd588d2a7cad7e9956f66701fa"
   integrity sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==
 
-artplayer@5.2.2:
+artplayer@5.2.2, artplayer@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/artplayer/-/artplayer-5.2.2.tgz#889643a8e3ce12042def839b20a02e8538bafb0c"
   integrity sha512-JsPRA9e+7KyWTh5KBeKLTcCigzGhpZulRFXvOeiFMbxnpPz9kZ/1STp1LZONqQXHkxX9wHTO6JhGOvzrduH2Lw==
@@ -8819,6 +8819,11 @@ node-machine-id@1.1.12:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/node-machine-id/-/node-machine-id-1.1.12.tgz#37904eee1e59b320bb9c5d6c0a59f3b469cb6267"
   integrity sha512-QNABxbrPa3qEIfrE6GOJ7BYIuignnJw7iQ2YPbc3Nla1HzRJjXzZOiikfF8m7eAMfichLt3M4VgLOetqgDmgGQ==
+
+node-mpv-2@^2.0.0-beta.3:
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/node-mpv-2/-/node-mpv-2-2.0.0-beta.3.tgz#34e6331235cc9c0a9901871563542f47c25bdc2e"
+  integrity sha512-R4G2YjTTk5R6cENosvpLhjVC5RrooPZrY/UsszPWv8Xom56MZFYsen9hyIJIGl6K5OJyuGla8jsF98xsUQKExA==
 
 node-preload@^0.2.1:
   version "0.2.1"
